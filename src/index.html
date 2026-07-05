@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudPulse</title>
+  </head>
+
+  <body>
+    <div class="app-container">
+      <header class="glass-panel header">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+          </svg>
+          <span>CloudPulse</span>
+        </div>
+        <div class="header-info">
+          <span id="hostname" class="info-badge">hostname</span>
+          <span id="os" class="info-badge">OS</span>
+          <span id="uptime" class="info-badge">uptime</span>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="stats-grid">
+          <!-- CPU -->
+          <div class="glass-panel stat-card cpu-card">
+            <div class="stat-header">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                <rect x="9" y="9" width="6" height="6"></rect>
+                <path d="M15 2v2"></path>
+                <path d="M15 20v2"></path>
+                <path d="M2 15h2"></path>
+                <path d="M2 9h2"></path>
+                <path d="M20 15h2"></path>
+                <path d="M20 9h2"></path>
+                <path d="M9 2v2"></path>
+                <path d="M9 20v2"></path>
+              </svg>
+              <span>CPU</span>
+            </div>
+            <div class="stat-value">
+              <span id="cpuUsage" class="big-number">0</span>
+              <span class="unit">%</span>
+            </div>
+            <div class="progress-ring">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" class="progress-bg"></circle>
+                <circle cx="50" cy="50" r="40" class="progress-fill" id="cpuRing"></circle>
+              </svg>
+            </div>
+            <div id="cpuName" class="stat-detail">CPU Name</div>
+            <div id="cpuCores" class="stat-detail">0 cores</div>
+          </div>
+
+          <!-- GPU -->
+          <div class="glass-panel stat-card gpu-card" id="gpuCard" style="display: none;">
+            <div class="stat-header">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                <path d="M6 12h.01"></path>
+                <path d="M10 12h.01"></path>
+                <path d="M14 12h.01"></path>
+                <path d="M18 12h.01"></path>
+              </svg>
+              <span>GPU</span>
+            </div>
+            <div class="stat-value">
+              <span id="gpuUsage" class="big-number">0</span>
+              <span class="unit">%</span>
+            </div>
+            <div class="progress-ring">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" class="progress-bg"></circle>
+                <circle cx="50" cy="50" r="40" class="progress-fill" id="gpuRing"></circle>
+              </svg>
+            </div>
+            <div id="gpuName" class="stat-detail">GPU Name</div>
+            <div id="gpuMemory" class="stat-detail">0 GB / 0 GB</div>
+            <div id="gpuTemp" class="stat-detail">0°C</div>
+          </div>
+
+          <!-- RAM -->
+          <div class="glass-panel stat-card ram-card">
+            <div class="stat-header">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                <path d="M6 10v4"></path>
+                <path d="M10 10v4"></path>
+                <path d="M14 10v4"></path>
+                <path d="M18 10v4"></path>
+              </svg>
+              <span>RAM</span>
+            </div>
+            <div class="stat-value">
+              <span id="ramUsage" class="big-number">0</span>
+              <span class="unit">%</span>
+            </div>
+            <div class="progress-ring">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" class="progress-bg"></circle>
+                <circle cx="50" cy="50" r="40" class="progress-fill" id="ramRing"></circle>
+              </svg>
+            </div>
+            <div id="ramUsed" class="stat-detail">0 GB / 0 GB</div>
+          </div>
+
+          <!-- Disk -->
+          <div class="glass-panel stat-card disk-card">
+            <div class="stat-header">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M3 5v14a9 3 0 0 0 18 0V5"></path>
+                <path d="M3 12a9 3 0 0 0 18 0"></path>
+              </svg>
+              <span>Disk</span>
+            </div>
+            <div class="stat-value">
+              <span id="diskUsage" class="big-number">0</span>
+              <span class="unit">%</span>
+            </div>
+            <div class="progress-ring">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" class="progress-bg"></circle>
+                <circle cx="50" cy="50" r="40" class="progress-fill" id="diskRing"></circle>
+              </svg>
+            </div>
+            <div id="diskUsed" class="stat-detail">0 GB / 0 GB</div>
+          </div>
+
+          <!-- Network -->
+          <div class="glass-panel stat-card network-card">
+            <div class="stat-header">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12" y2="20"></line>
+              </svg>
+              <span>Network</span>
+            </div>
+            <div class="network-stats">
+              <div class="net-stat">
+                <span class="net-label">↓ Download</span>
+                <span id="netDown" class="net-value">0 KB/s</span>
+              </div>
+              <div class="net-stat">
+                <span class="net-label">↑ Upload</span>
+                <span id="netUp" class="net-value">0 KB/s</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- System Info -->
+          <div class="glass-panel stat-card info-card">
+            <div class="stat-header">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>System Info</span>
+            </div>
+            <div class="info-list">
+              <div class="info-item">
+                <span class="info-label">Kernel:</span>
+                <span id="kernel" class="info-value">-</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Arch:</span>
+                <span id="arch" class="info-value">-</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Processes:</span>
+                <span id="processes" class="info-value">-</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Processes -->
+          <div class="glass-panel stat-card processes-card">
+            <div class="stat-header">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+              <span>Top Processes</span>
+            </div>
+            <div id="topProcesses" class="processes-list"></div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="glass-panel footer">
+        <p>CloudPulse v1.0 • Made by wh1laye</p>
+      </footer>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
